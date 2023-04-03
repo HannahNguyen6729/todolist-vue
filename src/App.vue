@@ -7,7 +7,7 @@
 
 <script>
 import HeaderComponent from './components/Header.vue'
-import TodosComponent from './components/Todo.vue'
+import TodosComponent from './components/Todos.vue'
 
 export default {
   name: 'App',
