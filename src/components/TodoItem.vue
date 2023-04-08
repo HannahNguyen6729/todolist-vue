@@ -1,18 +1,43 @@
 <template>
-  <div>
-    <p id="item">{{ todoProps }}</p>
-  </div>
+  <p :class="['item', todoProps.isCompleted ? 'isCompleted' : '']" :id="taskId">
+    <input type="checkbox" :checked="todoProps.isCompleted" v-on:change="markItemCompleted" />
+    {{ todoProps.title }} - id: {{ todoProps.id }}
+    <button class="btn">delete</button>
+  </p>
 </template>
 
 <script>
+import { ref } from 'vue'
 export default {
   name: 'TodoItem-component',
-  props: ['todoProps']
+  props: ['todoProps'],
+  setup(props, context) {
+    const taskId = ref('my-id')
+    const markItemCompleted = (event) => {
+      console.log('event', event.target)
+      console.log('props.todoProps', props.todoProps)
+      console.log('context', context)
+      context.emit('check-task', props.todoProps.id)
+    }
+    return { taskId, markItemCompleted }
+  }
 }
 </script>
 
 <style>
-#item {
-  background-color: pink;
+.item {
+  padding: 1rem 1rem;
+  border-bottom: 1px solid grey;
+}
+.isCompleted {
+  text-decoration: line-through;
+}
+.btn {
+  float: right;
+  background: red;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
 }
 </style>
