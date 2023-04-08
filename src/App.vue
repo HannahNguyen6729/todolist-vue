@@ -1,6 +1,7 @@
 <template>
   <div id="myApp">
     <HeaderComponent />
+
     <TodosComponent />
   </div>
 </template>

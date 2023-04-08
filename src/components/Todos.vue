@@ -1,5 +1,6 @@
 <template>
   <div>
+    <AddTodoComponent @add-todo="addTodo" />
     <TodoItemComponent
       v-for="task in todoList"
       :key="task.id"
@@ -12,27 +13,29 @@
 
 <script>
 import { ref } from 'vue'
+import { v4 as uuidv4 } from 'uuid'
 import TodoItemComponent from './TodoItem.vue'
+import AddTodoComponent from './AddTodo.vue'
 
 export default {
   name: 'Todos-component',
-  components: { TodoItemComponent },
+  components: { TodoItemComponent, AddTodoComponent },
   //setup(): pass all data to the template, including all data of component
   setup() {
     //ref: start initial data/ state
     const todos = ref([
       {
-        id: 1,
+        id: uuidv4(),
         title: 'task 1',
         isCompleted: false
       },
       {
-        id: 2,
+        id: uuidv4(),
         title: 'task 2',
         isCompleted: false
       },
       {
-        id: 3,
+        id: uuidv4(),
         title: 'task 3',
         isCompleted: false
       }
@@ -47,11 +50,17 @@ export default {
       })
     }
 
+    const addTodo = (newTask) => {
+      // console.log('newTask', newTask)
+      // console.log('todos.value', todos.value)
+      todos.value.push(newTask)
+    }
+
     const deleteTodoItem = (id) => {
       // console.log('todo item id received from child component', id)
       todos.value = todos.value.filter((task) => task.id !== id)
     }
-    return { todoList: todos, checkTodoTask, deleteTodoItem }
+    return { todoList: todos, checkTodoTask, deleteTodoItem, addTodo }
   }
 }
 </script>
