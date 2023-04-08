@@ -2,9 +2,10 @@
   <div>
     <TodoItemComponent
       v-for="task in todoList"
-      v-bind:key="task.id"
-      v-bind:todoProps="task"
-      v-on:check-task="checkTodoTask"
+      :key="task.id"
+      :todoProps="task"
+      @check-task="checkTodoTask"
+      @delete-item="deleteTodoItem"
     />
   </div>
 </template>
@@ -45,7 +46,12 @@ export default {
         return task
       })
     }
-    return { todoList: todos, checkTodoTask }
+
+    const deleteTodoItem = (id) => {
+      // console.log('todo item id received from child component', id)
+      todos.value = todos.value.filter((task) => task.id !== id)
+    }
+    return { todoList: todos, checkTodoTask, deleteTodoItem }
   }
 }
 </script>
