@@ -6,7 +6,7 @@
 </template>
 <script>
 import { ref } from 'vue'
-import { v4 as uuidv4 } from 'uuid'
+//import { v4 as uuidv4 } from 'uuid'
 
 export default {
   name: 'AddTodoComponent',
@@ -20,9 +20,9 @@ export default {
     const handleAddTodo = (event) => {
       event.preventDefault()
       const newTask = {
-        id: uuidv4(),
+        //  id: uuidv4(),
         title: title.value,
-        isCompleted: false
+        completed: false
       }
       context.emit('add-todo', newTask)
       title.value = ''

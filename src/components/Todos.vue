@@ -57,15 +57,21 @@ export default {
       // console.log('task id received from child component', id)
       // console.log('todos', todos)
       todos.value = todos.value.map((task) => {
-        if (task.id === id) task.isCompleted = !task.isCompleted
+        if (task.id === id) task.completed = !task.completed
         return task
       })
     }
 
-    const addTodo = (newTask) => {
-      // console.log('newTask', newTask)
-      // console.log('todos.value', todos.value)
-      todos.value.push(newTask)
+    const addTodo = async (newTask) => {
+      try {
+        // console.log('newTask', newTask)
+        // console.log('todos.value', todos.value)
+        const res = await axios.post('https://jsonplaceholder.typicode.com/todos', newTask)
+        //console.log(res.data)
+        todos.value.push(res.data)
+      } catch (e) {
+        console.log(e)
+      }
     }
 
     const deleteTodoItem = async (id) => {

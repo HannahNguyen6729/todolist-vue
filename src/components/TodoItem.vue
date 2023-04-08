@@ -1,6 +1,6 @@
 <template>
-  <p :class="['item', todoProps.isCompleted ? 'isCompleted' : '']" :id="taskId">
-    <input type="checkbox" :checked="todoProps.isCompleted" @change="markItemCompleted" />
+  <p :class="['item', todoProps.completed ? 'isCompleted' : '']" :id="taskId">
+    <input type="checkbox" :checked="todoProps.completed" @change="markItemCompleted" />
     {{ todoProps.title }} - id: {{ todoProps.id }}
     <button class="btn" @click="deleteItem">delete</button>
   </p>
