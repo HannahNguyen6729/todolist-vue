@@ -1,7 +1,7 @@
 <template>
   <form @submit="handleAddTodo">
     <input v-model="title" @input="handleInputChange" type="text" placeholder="enter task..." />
-    <input type="submit" value="Add" class="add-btn" />
+    <button type="submit" class="add-btn">Add</button>
   </form>
 </template>
 <script>
